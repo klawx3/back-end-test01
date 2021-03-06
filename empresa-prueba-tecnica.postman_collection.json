@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "aab547d0-dc9a-4960-864c-2aa222f7d7bd",
+		"name": "empresa-prueba-tecnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET ALL empresa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/empresa",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"empresa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ONE empresa BY id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/empresa/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"empresa",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "empresa BY id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE empresa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\" : \"empresa x\",\n    \"actividad\" : \"actividad x\",\n    \"activa\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/empresa",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"empresa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update EMPRESA",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\" : \"asdasdasd\",\n    \"actividad\" : \"asdasdasd\",\n    \"activa\" : 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/empresa/7",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"empresa",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
