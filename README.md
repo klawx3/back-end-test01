@@ -90,7 +90,7 @@ python ejercicio5.py
 python ejercicio6.py
 ```
 
-> Nota: ejercicio5.py puede demorar si no se modifica el parametro **DIVISORES** a un numero mas bajo ya que este ejercicio utiliza un algoritmo de fuerza bruta para hacer la busqueda de palabras con una complejidad ciclomatica de O( N\*P\*len )
+> Nota: ejercicio5.py puede demorar si no se modifica el parametro **DIVISORES** a un numero mas bajo
 
 ### Ejercicio 4
 
