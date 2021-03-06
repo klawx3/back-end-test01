@@ -47,7 +47,45 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "localhost:3000/empresa/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"empresa",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update EMPRESA",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\" : \"5555555555\",\n    \"actividad\" : \"55555555555555\",\n    \"activa\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/empresa/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"empresa",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -58,7 +96,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nombre\" : \"empresa x\",\n    \"actividad\" : \"actividad x\",\n    \"activa\" : 1\n}",
+					"raw": "{\n    \"nombre\" : \"new\",\n    \"actividad\" : \"new\",\n    \"activa\" : 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -73,34 +111,6 @@
 					"port": "3000",
 					"path": [
 						"empresa"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "update EMPRESA",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"nombre\" : \"asdasdasd\",\n    \"actividad\" : \"asdasdasd\",\n    \"activa\" : 0\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/empresa/7",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"empresa",
-						"7"
 					]
 				}
 			},
