@@ -1,5 +1,6 @@
-import express, { response } from "express";
+import express from "express";
 import BodyParamsException from "../exception/BodyParamsException";
+//import BodyParamsException from "../exception/BodyParamsException";
 import EmpresaNotExistsException from "../exception/EmpresaNotExistsException";
 import InvalidParamException from "../exception/InvalidParamException";
 import Empresa from "../models/Empresa";
@@ -16,32 +17,35 @@ export default class EmpresaController extends Controller {
     }
 
     public buildAllRequests(): void {
-        this.router.post('/', this.createEmpresa);
+        this.router.put("/:id", this.changeEmpresa);
+
+        this.router.post('/', this.makeEmpresa);
         this.router.get('/', this.getAllEmpresas);
-        this.router.get('/:id', this.getOneEmpresaById);
-        this.router.put("/:id", this.updateEmpresa);
+        
+        this.router.get('/:id', this.getOneEmpresaById);        
         this.router.delete('/:id', this.deleteEmpresaById);        
     }
 
-    private createEmpresa = (request: express.Request, _response: express.Response, _next : express.NextFunction) => {
-        const empresaFromBody : Empresa | null = this.extractEmpresaFromBody(request);
-        if(empresaFromBody){
-            this.daoContainer.daoEmpresa.create(empresaFromBody);
-            response.send(201);
-        }else{
-            _next(new BodyParamsException(`this endpoinds needs : nombre, actividad, activa. ej:{'nombre' : 'empresa x', 'actividad' : 'actividad x','activa' : 1}`));
-        }
+    private makeEmpresa = async (_request: express.Request, _response: express.Response, _next : express.NextFunction) => {
+        //console.log(JSON.stringify(_request.headers));
+        const empresaFromBody : Empresa | null = this.extractEmpresaFromBody(_request);
+          if(empresaFromBody){
+              this.daoContainer.daoEmpresa.create(empresaFromBody);
+            _response.send(201);
+          }else{
+              _next(new BodyParamsException(`this endpoinds needs : nombre, actividad, activa. ej:{'nombre' : 'empresa x', 'actividad' : 'actividad x','activa' : 1}`));
+         }
      }
 
-    private updateEmpresa = async (request: express.Request, _response: express.Response, _next : express.NextFunction) => {
-        const id = Number(request.params["id"]);
+    private changeEmpresa = async (_request: express.Request, _response: express.Response, _next : express.NextFunction) => {
+        const id = Number(_request.params["id"]);
         if(id){
             const empresa: Empresa = await this.daoContainer.daoEmpresa.findOne(id);
             if(empresa){
-                const empresaFromBody : Empresa | null = this.extractEmpresaFromBody(request);
-                if(empresaFromBody){
-                    this.daoContainer.daoEmpresa.modify(empresa,id);
-                    response.send(201);
+                const empresaFromBody2 : Empresa | null = this.extractEmpresaFromBody(_request);
+                if(empresaFromBody2){
+                    this.daoContainer.daoEmpresa.modify(empresaFromBody2,id);
+                    _response.send(200);
                 }else{
                     _next(new BodyParamsException(`this endpoinds needs : nombre, actividad, activa. ej:{'nombre' : 'empresa x', 'actividad' : 'actividad x','activa' : 1}`));
                 } 
@@ -49,7 +53,7 @@ export default class EmpresaController extends Controller {
                 _next(new EmpresaNotExistsException());
             }
         }else{
-            _next(new InvalidParamException("id"));
+            _next(new InvalidParamException());
         }
     }
 
@@ -62,9 +66,14 @@ export default class EmpresaController extends Controller {
         const id = Number(_request.params["id"]);
         if(id){
             const empresa: Empresa = await this.daoContainer.daoEmpresa.findOne(id);
-            _response.send(JSON.stringify(empresa));
+            if(empresa){
+                _response.send(JSON.stringify(empresa));
+            }else{
+                _next(new EmpresaNotExistsException());
+            }
+            
         }else{
-            _next(new InvalidParamException("id"));
+            _next(new InvalidParamException());
         }        
      }
 
@@ -79,34 +88,20 @@ export default class EmpresaController extends Controller {
                 _next(new EmpresaNotExistsException());
             }
         }else{
-            _next(new InvalidParamException("id"));
+            _next(new InvalidParamException());
         }        
      }
 
-    private extractEmpresaFromBody(request: express.Request) : Empresa | null {
-        try {
-            console.log(request.body);
-            const nombre: string = request.body["nombre"];
-            const actividad : string = request.body["actividad"];
-            const activa : number = Number(request.body["activa"] || 0) ;
-    
-            console.log("nombre:" +nombre);
-            console.log("actividad:" +actividad);
-            console.log("activa:" +activa);
-    
-            if(nombre && actividad){
-                const empresa : Empresa  = {
-                    nombre : nombre,
-                    actividad : actividad,
-                    activa : activa,
-                }
-                return empresa;
+    private extractEmpresaFromBody = (request: express.Request) : Empresa | null => {
+        const {nombre,actividad,activa} = request.body; 
+        if(nombre && actividad){
+            const empresa : Empresa  = {
+                nombre : nombre,
+                actividad : actividad,
+                activa : activa,
             }
-            return null;
-        } catch (error) {
-            console.log(error);
+            return empresa;
         }
         return null;
     }
-
 }

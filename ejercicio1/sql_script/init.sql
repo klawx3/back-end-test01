@@ -9,7 +9,7 @@ USE empresa;
 CREATE TABLE empresa (
     id INT AUTO_INCREMENT,
     nombre VARCHAR(50),
-    fecha_creacion DATE,
+    fecha_creacion DATETIME,
     actividad TEXT,
     activa BIT(1),
 

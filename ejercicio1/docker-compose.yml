@@ -15,7 +15,7 @@ services:
     container_name: 'mariadb-backend'
     restart: always
     environment:
-      MYSQL_DATABASE: 'empresa_prueba_tecnica'
+      MYSQL_DATABASE: 'empresa_prueba_tecnica' # sin usar
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: '123456'
       MYSQL_ROOT_PASSWORD: '123456'

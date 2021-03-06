@@ -45,8 +45,10 @@ export default class EmpresaDaoImpl implements DaoEmpresa {
     }
 
     modify(empresa: Empresa, id: number): void {
+        const updateSql = `UPDATE empresa SET nombre = '${empresa.nombre}',actividad = '${empresa.actividad}', activa = ${empresa.activa} WHERE id = ${id}`;
+        console.log(updateSql);
         const findOne : ForumQuery<null> = {
-            sql: `UPDATE empresa SET nombre = '',fecha_creacion = '${empresa.fecha_creacion}',actividad = '${empresa.actividad}', activa = ${empresa.activa} WHERE id = ${id}`,
+            sql: updateSql,
             column : () => (null)
         }
         return new QueryFactory<null>(findOne,this.con).getNoPromise();

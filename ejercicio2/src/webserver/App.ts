@@ -1,8 +1,9 @@
-import * as bodyParser from 'body-parser';
+//import * as bodyParser from 'body-parser';
 import express from 'express';
 import ErrorMiddleware from '../middleware/ErrorMiddleware';
 import AppConfig from './AppConfig';
 import Controller from './Controller';
+import Middleware from './Middleware';
 
 
 export default class App {
@@ -12,13 +13,16 @@ export default class App {
     constructor(appConfig: AppConfig) {
         this.appConfig = appConfig;
         this.expressApp = express();
-        this.initMiddleware();
+        this.initMiddleware(appConfig.middleware);
         this.initControllers(appConfig.controllers);
         this.initErrorMiddleware();
     }
 
-    private initMiddleware() {
-        this.expressApp.use(bodyParser.json());
+    private initMiddleware(middleware: Array<Middleware>) {
+        this.expressApp.use(express.json());
+        middleware.forEach(middleware => {
+            this.expressApp.use(middleware.getMiddleware());
+        });        
     }
 
     public listen(): void {

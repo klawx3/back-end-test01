@@ -8,7 +8,7 @@ export default class LoggingMiddleware implements Middleware{
     }
 
     private middleware = (_request: express.Request, _response: express.Response, next: express.NextFunction) => {
-        console.log("Logeando... middleware");
+        console.log("requesting");
         next();
     }
 }

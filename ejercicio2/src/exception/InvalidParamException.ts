@@ -1,7 +1,7 @@
 import HttpException from "./HttpException";
 
-export default class InvalidParamException extends HttpException{
-    constructor(invalid : string){
-        super(404,"Invalid param: " + invalid);
+export default class InvalidParamException extends HttpException {
+    constructor(){
+        super(402,"Invalid param");
     }
 }
