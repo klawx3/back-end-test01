@@ -16,7 +16,7 @@ def get_numbers_of_divisor(number):
     return divisors
 
 if __name__ == "__main__":
-    DIVISORES = 1000 # probar con un numero pequeño , de lo contrario demorara
+    DIVISORES = 100 # probar con un numero pequeño , de lo contrario demorara
 
     for fibonnaci_number in fibonnaci_infinite_generator():
         divisors = get_numbers_of_divisor(fibonnaci_number)
